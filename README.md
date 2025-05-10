@@ -14,6 +14,7 @@ Edit the ~/.xinit file, for this, i will use nano as an example:
 
 Remove the containing of xinitrc, and put:
 `<PATH TO KUDE SRC MAIN.RS FILE> & (Include the ampersand)`
+
 `exec <Put the X11 Application name you want to run here>`
 
 Then, type `startx`, and you should be good to go!
