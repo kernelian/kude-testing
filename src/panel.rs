@@ -1,20 +1,3 @@
-// src/panel.rs
-use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Label, Orientation, Box as GtkBox};
-use glib::{timeout_add_seconds_local, Continue};
-use chrono::Local;
-use std::cell::RefCell;
-use std::rc::Rc;
-
-pub fn launch_panel() {
-    let app = Application::builder()
-        .application_id("com.example.GtkPanel")
-        .build();
-
-    app.connect_activate(build_ui);
-    app.run();
-}
-
 fn build_ui(app: &Application) {
     let window = ApplicationWindow::builder()
         .application(app)
@@ -33,6 +16,16 @@ fn build_ui(app: &Application) {
     container.pack_start(&clock_label, true, true, 10);
     window.add(&container);
 
+    // 🔧 Apply CSS: white background, black text
+    let css = b"* { background-color: white; color: black; }";
+    let provider = gtk::CssProvider::new();
+    provider.load_from_data(css).expect("Failed to load CSS");
+    gtk::StyleContext::add_provider_for_screen(
+        &gdk::Screen::default().expect("Failed to get screen"),
+        &provider,
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+    );
+
     let clock = Rc::new(RefCell::new(clock_label));
     update_clock(Rc::clone(&clock));
     timeout_add_seconds_local(1, move || {
@@ -41,10 +34,4 @@ fn build_ui(app: &Application) {
     });
 
     window.show_all();
-}
-
-fn update_clock(clock_label: Rc<RefCell<Label>>) {
-    let now = Local::now();
-    let time_str = now.format("%H:%M:%S").to_string();
-    clock_label.borrow().set_text(&time_str);
 }
