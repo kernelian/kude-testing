@@ -93,7 +93,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         0, // border width
         WindowClass::INPUT_OUTPUT,
         0, // visual
-        &CreateWindowAux::new().background_pixel(screen.black_pixel),
+        &CreateWindowAux::new().background_pixel(screen.white_pixel),
     )?;
 
     // Set override_redirect so window manager ignores the taskbar
