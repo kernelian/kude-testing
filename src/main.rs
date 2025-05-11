@@ -29,11 +29,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Got event: {:?}", event);
     }
 
-    use x11rb::connection::Connection;
-use x11rb::protocol::xproto::*;
-use x11rb::rust_connection::RustConnection;
-use x11rb::wrapper::ConnectionExt as _;
-
     let width = screen.width_in_pixels;
     let height = 24;
 
