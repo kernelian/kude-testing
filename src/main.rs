@@ -21,14 +21,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ),
     )?;
 
-    conn.flush()?;
+    conn.flush()?; // apply event mask
 
-    // Event loop
-    loop {
-        let event = conn.wait_for_event()?;
-        println!("Got event: {:?}", event);
-    }
-
+    // Create the taskbar window
     let width = screen.width_in_pixels;
     let height = 24;
 
@@ -50,10 +45,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     conn.map_window(win)?;
     conn.flush()?;
 
+    // Now start the event loop
     loop {
-        conn.wait_for_event()?;
+        let event = conn.wait_for_event()?;
+        println!("Got event: {:?}", event);
     }
 }
 
-    
-}
