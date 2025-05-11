@@ -1,5 +1,10 @@
 use chrono::Local;
-use std::{error::Error, thread, time::Duration};
+use std::{
+    error::Error,
+    sync::{Arc, Mutex},
+    thread,
+    time::Duration,
+};
 use x11rb::{
     connection::Connection,
     protocol::xproto::*,
@@ -7,7 +12,6 @@ use x11rb::{
 };
 
 fn main() -> Result<(), Box<dyn Error>> {
-    println!("Taskbar running!"); // Ensuring
     let (conn, screen_num): (RustConnection, usize) = RustConnection::connect(None)?;
     let screen = &conn.setup().roots[screen_num];
 
@@ -31,21 +35,30 @@ fn main() -> Result<(), Box<dyn Error>> {
     conn.map_window(win)?;
     conn.flush()?;
 
-    // Create graphics context for drawing text
+    // Create GC
     let gc = conn.generate_id()?;
     conn.create_gc(gc, win, &CreateGCAux::new().foreground(screen.black_pixel))?;
 
-    // Start the clock thread
-    let conn_clone = conn.clone();
+    // Wrap connection in Arc<Mutex<...>> to share safely between threads
+    let shared_conn = Arc::new(Mutex::new(conn));
+
+    // Clone for the clock thread
+    let clock_conn = Arc::clone(&shared_conn);
+
     thread::spawn(move || loop {
         let time = Local::now().format("%H:%M:%S").to_string();
-        let _ = conn_clone.poly_text_8(win, gc, 10, 16, time.as_bytes());
-        let _ = conn_clone.flush();
+
+        let mut conn = clock_conn.lock().unwrap();
+        let _ = conn.poly_text8(win, gc, 10, 16, time.as_bytes());
+        let _ = conn.flush();
+
         thread::sleep(Duration::from_secs(1));
     });
 
-    // Event loop
+    // Main event loop
+    let main_conn = Arc::clone(&shared_conn);
     loop {
+        let mut conn = main_conn.lock().unwrap();
         let _ = conn.wait_for_event()?;
     }
 }
