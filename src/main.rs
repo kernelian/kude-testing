@@ -1,3 +1,4 @@
+use std::process::Command;
 use x11rb::connection::Connection;
 use x11rb::protocol::xproto::*;
 use x11rb::rust_connection::RustConnection;
@@ -11,23 +12,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Connected to X server. Root window ID: {}", screen.root);
 
-    // Set up to receive window manager events
-    conn.change_window_attributes(
-        screen.root,
-        &ChangeWindowAttributesAux::new().event_mask(
-            EventMask::SUBSTRUCTURE_REDIRECT
-            | EventMask::SUBSTRUCTURE_NOTIFY
-            | EventMask::STRUCTURE_NOTIFY,
-        ),
-    )?;
+    // Start the taskbar program as a background process
+    let taskbar_path = "/home/test/kude-testing/src/taskbar.rs";
+    Command::new("cargo")
+        .arg("run")
+        .arg("--bin")
+        .arg("taskbar")
+        .spawn()?;
 
-    conn.flush()?;
-
-    // Window dimensions
+    // Window dimensions for the main window (this is your desktop environment part)
     let width = screen.width_in_pixels;
     let height = 24;
 
-    // Create the taskbar window
+    // Create the main window
     let win = conn.generate_id()?;
     conn.create_window(
         screen.root_depth,
@@ -40,14 +37,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         0,
         WindowClass::INPUT_OUTPUT,
         0,
-        &CreateWindowAux::new().background_pixel(screen.black_pixel),
+        &CreateWindowAux::new().background_pixel(screen.white_pixel),
     )?;
 
     // Make sure the window is shown
     conn.map_window(win)?;
     conn.flush()?;  // Flush to ensure the window is actually rendered
 
-    // Event loop
+    println!("Main window created and mapped.");
+
+    // Event loop for handling events (as part of your desktop environment)
     loop {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
@@ -55,3 +54,4 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Flush after each event to keep things smooth
         conn.flush()?;
     }
+}
