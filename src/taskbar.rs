@@ -4,6 +4,7 @@ use x11rb::rust_connection::RustConnection;
 use x11rb::protocol::Event;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("Taskbar running!");
     let (conn, screen_num) = RustConnection::connect(None)?;
     let screen = &conn.setup().roots[screen_num];
     println!("Connected to display. Root window: {}", screen.root);
