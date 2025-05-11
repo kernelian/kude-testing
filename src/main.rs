@@ -1,6 +1,7 @@
 use x11rb::connection::Connection;
 use x11rb::protocol::xproto::*;
 use x11rb::rust_connection::RustConnection;
+use std::{thread, time};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Connect to the X server
@@ -42,6 +43,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         0,
         &CreateWindowAux::new().background_pixel(screen.black_pixel),
     )?;
+
+    // Set the taskbar to be on top by overriding the window manager (if any)
+    conn.change_window_attributes(
+        win,
+        &ChangeWindowAttributesAux::new().override_redirect(true),
+    )?;
+
+    conn.flush()?; // Make sure everything is properly updated
+
+    // Wait a moment to ensure the X server is fully initialized
+    thread::sleep(time::Duration::from_secs(1)); // Adjust the duration if necessary
 
     // Make sure the window is shown
     conn.map_window(win)?;
