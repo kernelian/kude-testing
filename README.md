@@ -20,6 +20,7 @@ CD to the directory of KUDE, and add the x11rb crate for everything to work.
 `cargo add x11rb`
 
 Edit the ~/.xinit file, for this, i will use nano as an example:
+
 `nano ~/.xinitrc`
 
 Remove the containing of xinitrc, and put:
