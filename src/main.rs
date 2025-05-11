@@ -29,25 +29,40 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Got event: {:?}", event);
     }
 
-        let width = screen.width_in_pixels;
-let height = 30; // height of your bar
-let win = conn.generate_id()?;
+    use x11rb::connection::Connection;
+use x11rb::protocol::xproto::*;
+use x11rb::rust_connection::RustConnection;
+use x11rb::wrapper::ConnectionExt as _;
 
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let (conn, screen_num) = RustConnection::connect(None)?;
+    let screen = &conn.setup().roots[screen_num];
 
-    // TESTING.
-// Create the bar window
-conn.create_window(
-    screen.root_depth,
-    win,
-    screen.root,
-    0,                         // x
-    (screen.height_in_pixels - height) as i16, // y
-    width,
-    height,
-    0,
-    WindowClass::INPUT_OUTPUT,
-    0,
-    &CreateWindowAux::new().background_pixel(screen.black_pixel),
-)?;
+    let width = screen.width_in_pixels;
+    let height = 24;
+
+    let win = conn.generate_id()?;
+    conn.create_window(
+        screen.root_depth,
+        win,
+        screen.root,
+        0,
+        (screen.height_in_pixels - height) as i16,
+        width,
+        height,
+        0,
+        WindowClass::INPUT_OUTPUT,
+        0,
+        &CreateWindowAux::new().background_pixel(screen.black_pixel),
+    )?;
+
+    conn.map_window(win)?;
+    conn.flush()?;
+
+    loop {
+        conn.wait_for_event()?;
+    }
+}
+
     
 }
