@@ -28,4 +28,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
     }
+
+        let width = screen.width_in_pixels;
+let height = 30; // height of your bar
+let win = conn.generate_id()?;
+
+
+    // TESTING.
+// Create the bar window
+conn.create_window(
+    screen.root_depth,
+    win,
+    screen.root,
+    0,                         // x
+    (screen.height_in_pixels - height) as i16, // y
+    width,
+    height,
+    0,
+    WindowClass::INPUT_OUTPUT,
+    0,
+    &CreateWindowAux::new().background_pixel(screen.black_pixel),
+)?;
+    
 }
