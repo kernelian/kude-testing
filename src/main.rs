@@ -12,14 +12,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Connected to X server. Root window ID: {}", screen.root);
 
-    // Start the taskbar program as a background process
-    let taskbar_path = "/home/test/kude-testing/src/taskbar.rs";
-    Command::new("cargo")
-        .arg("run")
-        .arg("--bin")
-        .arg("taskbar")
-        .spawn()?;
-
     // Window dimensions for the main window (this is your desktop environment part)
     let width = screen.width_in_pixels;
     let height = 24;
