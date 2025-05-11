@@ -53,7 +53,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     conn.flush()?; // Make sure everything is properly updated
 
     // Wait a moment to ensure the X server is fully initialized
-    thread::sleep(time::Duration::from_secs(1)); // Adjust the duration if necessary
+    thread::sleep(time::Duration::from_secs(3)); // Increased delay time
 
     // Make sure the window is shown
     conn.map_window(win)?;
