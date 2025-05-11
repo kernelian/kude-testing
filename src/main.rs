@@ -28,4 +28,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
     }
+
+    panel::launch_panel()
+    
 }
