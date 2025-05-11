@@ -34,10 +34,6 @@ use x11rb::protocol::xproto::*;
 use x11rb::rust_connection::RustConnection;
 use x11rb::wrapper::ConnectionExt as _;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let (conn, screen_num) = RustConnection::connect(None)?;
-    let screen = &conn.setup().roots[screen_num];
-
     let width = screen.width_in_pixels;
     let height = 24;
 
