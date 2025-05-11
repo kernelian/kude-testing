@@ -1,11 +1,12 @@
+// src/panel.rs
 use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow, Label, Orientation, Box as GtkBox};
 use glib::{timeout_add_seconds_local, Continue};
+use chrono::Local;
 use std::cell::RefCell;
 use std::rc::Rc;
-use chrono::Local;
 
-fn main() {
+pub fn launch_panel() {
     let app = Application::builder()
         .application_id("com.example.GtkPanel")
         .build();
@@ -15,18 +16,17 @@ fn main() {
 }
 
 fn build_ui(app: &Application) {
-    // Create a top-level window with no decorations (like a panel)
     let window = ApplicationWindow::builder()
         .application(app)
         .title("Panel")
-        .default_width(800) // adjust based on screen
+        .default_width(800)
         .default_height(24)
         .decorated(false)
         .resizable(false)
         .build();
 
-    window.set_keep_above(true); // Always on top
-    window.move_(0, 0); // Top of screen
+    window.set_keep_above(true);
+    window.move_(0, 0);
 
     let container = GtkBox::new(Orientation::Horizontal, 5);
     let clock_label = Label::new(None);
