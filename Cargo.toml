@@ -8,7 +8,3 @@ edition = "2024"
 [[bin]]
 name = "main"
 path = "src/main.rs"
-
-[[bin]]
-name = "taskbar"
-path = "src/taskbar.rs"
