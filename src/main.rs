@@ -12,7 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Connected to X server. Root window ID: {}", screen.root);
 
-    // Window dimensions for the main window (this is your desktop environment part)
+    // Window dimensions for the main window
     let width = screen.width_in_pixels;
     let height = 24;
 
