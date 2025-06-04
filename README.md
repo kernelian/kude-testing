@@ -1,4 +1,7 @@
-This is the development repository of The Kernelian UNIX Desktop Environment (The T falls off) for testing, and other stuff.
+This is the development repository of The Kernelian UNIX Desktop Environment.
+
+This just calls X. Nothing much.
+
 
 
 How to install on Arch Linux:
