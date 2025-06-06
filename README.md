@@ -1,6 +1,12 @@
-This is the development repository of The Kernelian UNIX Desktop Environment.
+# Wire
 
-Very barebones at the moment.
+Wire is a simple application that calls X, giving unlimited creativity!
+
+
+# How it works
+
+It connects to X, meaning you can run anything you want on there! Be it any desktop or a WM you want!
+
 
 
 
