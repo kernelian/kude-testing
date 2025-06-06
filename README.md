@@ -1,6 +1,6 @@
 This is the development repository of The Kernelian UNIX Desktop Environment.
 
-This just calls X. Nothing much.
+Very barebones at the moment.
 
 
 
