@@ -71,7 +71,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     conn.map_window(win)?;
     conn.flush()?;
 
-    // Create your own GC
+  
     let gc = conn.generate_id()?;
     conn.create_gc(gc, win, &CreateGCAux::new())?;
 
