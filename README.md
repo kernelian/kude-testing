@@ -20,11 +20,11 @@ Install Rust:
 
 "https://www.rust-lang.org/tools/install"
 
-Clone the repo, for this, you will need to have git installed.
+Clone the repo, for this, i will use git as an example.
 
-`git clone https://github.com/kernelian/kude-testing`
+`git clone https://github.com/kernelian/wire`
 
-CD to the directory of KUDE, and add the x11rb crate for everything to work.
+CD to the directory of Wire, and add the x11rb crate for everything to work.
 
 `cargo add x11rb`
 
@@ -34,7 +34,7 @@ Edit the ~/.xinit file, for this, i will use nano as an example:
 
 Remove the containing of xinitrc, and put:
 
-`<PATH TO KUDE SRC MAIN.RS FILE> & (Include the ampersand)`
+`<PATH TO Wire SRC MAIN.RS FILE> & (Include the ampersand)`
 
 `exec <Put the X11 Application name you want to run here>`
 
