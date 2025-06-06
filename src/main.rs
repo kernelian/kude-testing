@@ -10,7 +10,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Connected to X server. Root window ID: {}", screen.root);
 
-    
+    // Events
     loop {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
