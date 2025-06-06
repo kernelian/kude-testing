@@ -38,7 +38,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Main window created and mapped.");
 
-    // Event loop for handling events (as part of your desktop environment)
+    
     loop {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
