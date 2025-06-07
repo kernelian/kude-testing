@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Read start.conf lines (programs to run)
     let config_path = dirs::home_dir()
         .unwrap()
-        .join(".config/wire/start.conf");
+        .join(".config/wire/startup.conf");
 
     let contents = fs::read_to_string(config_path)?;
     for line in contents.lines() {
