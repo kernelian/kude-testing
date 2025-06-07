@@ -1,43 +1,48 @@
 # Wire
 
-Wire is a simple application that calls X, giving unlimited creativity!
+Wire is a simple application that lets you make your own desktop environment really simply.
 
 
 # How it works
 
-It connects to X, meaning you can run anything you want on there! Be it any desktop or a WM you want!
+Wire is an application that calls X, reads your startup.conf for applications to start, and it runs them, and you can make your own desktop environment!
 
 
+# How to use the binary?
+
+You don't need Rust installed if you don't want to compile it yourself, a ready to go binary is already provided in the binaries folder.
+
+Here's how to use it:
+
+1. Install xorg and xorg-xinit if you don't have them
+
+   Arch: `sudo pacman -S xorg xorg-xinit`
 
 
-How to install on Arch Linux:
+2. Move the binary to any location you want, or you can just keep it.
 
-Install Xorg:
+3. Edit .xinitrc, i will use nano as an example for this
 
-`sudo pacman -S xorg xorg-xinit`
+   `nano ~/.xinitrc`
+ 
+   To run the binary:
 
-Install Rust:
+   `exec your/path/to/the/binary/here`
 
-"https://www.rust-lang.org/tools/install"
+   And that's all for .xinitrc!
 
-Clone the repo, for this, i will use git as an example.
+4. Don't startx (or how you want to launch it) just yet, make a folder named wire and create a startup.conf file:
 
-`git clone https://github.com/kernelian/wire`
+   `nano ~/.config/wire/startup.conf`
 
-CD to the directory of Wire, and add the x11rb crate for everything to work.
+5. Edit startup.conf to start the applications, be it panels or anything you want!
 
-`cargo add x11rb`
-
-Edit the ~/.xinit file, for this, i will use nano as an example:
-
-`nano ~/.xinitrc`
-
-Remove the containing of xinitrc, and put:
-
-`<PATH TO WIRE SRC MAIN.RS FILE> & (Include the ampersand)`
-
-`exec <Put the X11 Application name you want to run here>`
-
-Then, type `startx`, and you should be good to go!
+6. Now, do `startx`, and you're all set!
 
 Enjoy!
+
+# How to compile it and use it?
+
+Compiling it is straightforward, you just need Rust installed.
+
+You just go to the Wire directory, and do `cargo build --release` or any other parameter you want to use, and then just follow the binary instructions.
