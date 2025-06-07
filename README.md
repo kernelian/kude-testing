@@ -8,9 +8,11 @@ Wire is a simple application that lets you make your own desktop environment rea
 Wire is an application that calls X, reads your startup.conf for applications to start, and it runs them, and you can make your own desktop environment!
 
 
-# How to use the binary?
+# How to use Wire?
 
-You don't need Rust installed if you don't want to compile it yourself, a ready to go binary is already provided in the binaries folder.
+You need to compile Wire from source, but don't worry, it's not going to take alot, since it's a really lightweight application.
+
+Just do `cargo build --release` and follow the instructions.
 
 Here's how to use it:
 
@@ -19,7 +21,7 @@ Here's how to use it:
    Arch: `sudo pacman -S xorg xorg-xinit`
 
 
-2. Move the binary to any location you want, or you can just keep it.
+2. Move the compiled binary to any location you want, or you can just keep it.
 
 3. Edit .xinitrc, i will use nano as an example for this
 
@@ -40,9 +42,3 @@ Here's how to use it:
 6. Now, do `startx`, and you're all set!
 
 Enjoy!
-
-# How to compile it and use it?
-
-Compiling it is straightforward, you just need Rust installed.
-
-You just go to the Wire directory, and do `cargo build --release` or any other parameter you want to use, and then just follow the binary instructions.
