@@ -8,7 +8,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let screen = &conn.setup().roots[screen_num];
     println!("Connected to X server. Root window ID: {}", screen.root);
 
-    // Read start.conf lines (programs to run)
+    // Read startup.conf lines (programs to run)
     let config_path = dirs::home_dir()
         .unwrap()
         .join(".config/wire/startup.conf");
