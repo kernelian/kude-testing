@@ -28,7 +28,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .expect(&format!("Failed to start command: {}", command));
     }
 
-    // Now the main event loop (your X event handling)
+    // Now the main event loop
     loop {
         let event = conn.wait_for_event()?;
         println!("Got event: {:?}", event);
