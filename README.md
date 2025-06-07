@@ -12,7 +12,7 @@ Wire is an application that calls X, reads your startup.conf for applications to
 
 You need to compile Wire from source, but don't worry, it's not going to take alot, since it's a really lightweight application.
 
-Just do `cargo build --release` and follow the instructions.
+Just do `cargo build --release` and follow the instructions. (Make sure you have Rust installed)
 
 Here's how to use it:
 
