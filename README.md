@@ -12,7 +12,7 @@ Wire is an application that calls X, reads your startup.conf for applications to
 
 You need to compile Wire from source, but don't worry, it's not going to take alot, since it's a really lightweight application.
 
-Add x11rb and the dirs crate using `cargo add x11rb dirs` and do `cargo build --release` (or any other parameter) to compile it from source and follow the instructions. (Make sure you have Rust installed)
+Do `cargo build --release` (or any other parameter) to compile it from source and follow the instructions. The crates are already in Cargo.toml. (Make sure you have Rust installed)
 
 Here's how to use it:
 
